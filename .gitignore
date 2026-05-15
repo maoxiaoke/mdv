@@ -3,6 +3,12 @@
 
 # Node
 node_modules/
+dist/
+coverage/
+
+# dotenv
+.env
+.env.*
 
 # Python
 __pycache__/
