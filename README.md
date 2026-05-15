@@ -1,21 +1,42 @@
 # mdv
 
-TypeScript + Node.js starter.
+Render Markdown with **MDX** (`@mdx-js/mdx`) and React.
 
-## Quick start
+This repo provides:
+
+- A small library API: compile Markdown/MDX to a React component or to HTML.
+- A tiny CLI (`mdv`) to render a `.md/.mdx` file to HTML.
+
+## Install
 
 ```bash
-npm install
-npm run dev
+npm i mdv
 ```
 
-Then open http://localhost:3000
+## Library usage
 
-## Scripts
+```ts
+import { renderMarkdownToHtml } from 'mdv'
 
-- `npm run dev` — run in watch mode (tsx)
-- `npm run build` — build to `dist/`
-- `npm start` — run the built output
-- `npm run lint` — eslint
-- `npm run format` — prettier
-- `npm test` — vitest
+const html = await renderMarkdownToHtml(`# Hello\n\n**bold**`)
+console.log(html)
+```
+
+## CLI usage
+
+```bash
+# to stdout
+npx mdv README.md
+
+# write to file
+npx mdv README.md -o out.html
+
+# from stdin
+cat README.md | npx mdv --stdin
+```
+
+## Notes
+
+- Uses `remark-gfm` by default.
+- Adds heading `id` via `rehype-slug` and autolinks headings via `rehype-autolink-headings`.
+- Requires Node.js >= 18.
